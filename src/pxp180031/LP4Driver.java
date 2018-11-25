@@ -1,4 +1,3 @@
-// Change to your netid
 package pxp180031;
 
 import java.util.Scanner;

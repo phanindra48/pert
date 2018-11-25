@@ -1,6 +1,10 @@
 
 /** Starter code for permutations and combinations of distinct items
- *  @author Phanindra Pydisetty
+ * @authors
+ * Phanindra Pydisetty
+ * Sahith Reddy
+ * Karttik Yellu
+ * Bharath Rudra
  **/
 
 package pxp180031;
