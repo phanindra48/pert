@@ -1,13 +1,9 @@
 
 /** Starter code for permutations and combinations of distinct items
- * @authors
- * Phanindra Pydisetty
- * Sahith Reddy
- * Karttik Yellu
- * Bharath Rudra
+ *  @author Phanindra Pydisetty
  **/
-
 package pxp180031;
+
 
 import java.util.Comparator;
 
@@ -43,6 +39,24 @@ public class Enumerate<T> {
   // n = arr.length, choose k things, d elements arr[0..d-1] done
   // c more elements are needed from arr[d..n-1]. d = k-c.
   public void permute(int c) { // To do for LP4
+	  int d;
+	  if(c == 0) {
+		  visit(arr);
+	  }
+	  else {
+		  d = k - c;
+		  permute(c - 1);
+		  for( int i = d+1; i <= arr.length - 1; i++) {
+			  T temp = arr[d];
+			  arr[d] = arr[i];
+			  arr[i] = temp;
+			  
+			  permute(c-1);
+			  
+			  arr[i] = arr[d];
+			  arr[d] = temp;
+		  }
+	  }
   }
 
   // choose c items from A[0..i-1]. In SP11-opt
@@ -134,7 +148,7 @@ public class Enumerate<T> {
 
   public static void main(String args[]) {
     int n = 4;
-    int k = 3;
+    int k = 2;
     if (args.length > 0) {
       n = Integer.parseInt(args[0]);
       k = n;
