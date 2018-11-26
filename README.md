@@ -12,15 +12,15 @@ Run below commands from terminal (assuming you are in project root folder)
 
 ## PERT
 
-To compile javac -d bin -sourcepath src src/pxp180031/LP4Driver.java
-To Run java -cp bin pxp180031.LP4Driver <input_path>
+To compile `javac -d bin -sourcepath src src/pxp180031/LP4Driver.java`
+To Run `java -cp bin pxp180031.LP4Driver <input_path>`
 
 ## EnumerateTopological
 
-To compile javac -d bin -sourcepath src src/pxp180031/EnumerateTopological.java
-To Run java -cp bin pxp180031.EnumerateTopological 0 <input_path>
+To compile `javac -d bin -sourcepath src src/pxp180031/EnumerateTopological.java`
+To Run `java -cp bin pxp180031.EnumerateTopological 0 <input_path>`
 
 ## Enumerate
 
-To compile javac -d bin -sourcepath src src/pxp180031/Enumerate.java
-To Run java -cp bin pxp180031.Enumerate <n> <k>
+To compile `javac -d bin -sourcepath src src/pxp180031/Enumerate.java`
+To Run `java -cp bin pxp180031.Enumerate <n> <k>`
