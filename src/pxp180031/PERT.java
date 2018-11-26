@@ -53,12 +53,13 @@ public class PERT extends GraphAlgorithm<PERT.PERTVertex> {
   }
 
   public boolean pert() {
-
     // Add source and target edges
     addEdgesForST();
     List<Vertex> tOrder = topologicalOrder();
 
-    if (tOrder == null) return true;
+    if (tOrder == null) {
+      return true;
+    }
     int maxTime = 0;
 
     for (Vertex u : tOrder) {
@@ -76,7 +77,7 @@ public class PERT extends GraphAlgorithm<PERT.PERTVertex> {
       }
     }
 
-    for (Vertex u: this.g) {
+    for (Vertex u : this.g) {
       setLC(u, maxTime);
     }
 
@@ -143,11 +144,13 @@ public class PERT extends GraphAlgorithm<PERT.PERTVertex> {
     for (int i = 2; i < g.size(); i++) {
       Vertex u = g.getVertex(i);
       // add source edge to edges with indegree 0
-      // if(u.inDegree() == 0) g.addEdge(s, u, 1, ++m);
-      g.addEdge(s, u, 1, ++m);
+      if (u.inDegree() == 0) {
+        g.addEdge(s, u, 1, ++m);
+      }
       // add target edge to edges with outdegree 0
-      // if(u.outDegree() == 0) g.addEdge(u, t, 1, ++m);
-      g.addEdge(u, t, 1, ++m);
+      if (u.outDegree() == 0) {
+        g.addEdge(u, t, 1, ++m);
+      }
     }
   }
 
@@ -157,15 +160,16 @@ public class PERT extends GraphAlgorithm<PERT.PERTVertex> {
     // Add source and target edges
     p.addEdgesForST();
 
-		for (Vertex u : g) {
-			p.setDuration(u, duration[u.getIndex()]);
-		}
+    for (Vertex u : g) {
+      p.setDuration(u, duration[u.getIndex()]);
+    }
 
     return p.pert() ? null : p;
   }
 
   /**
    * Utility function to get topological order using DFS
+   *
    * @param v
    * @param g
    * @param visited
@@ -173,14 +177,11 @@ public class PERT extends GraphAlgorithm<PERT.PERTVertex> {
    * @param finisList
    * @throws Exception
    */
-  public void depthFirstSearch(
-    Vertex v,
-    Graph g,
-    boolean[] visited,
-    boolean[] onPath,
-    LinkedList<Vertex> finisList
-  ) throws Exception{
-    if (visited[v.getIndex()]) return;
+  public void depthFirstSearch(Vertex v, Graph g, boolean[] visited, boolean[] onPath, LinkedList<Vertex> finisList)
+      throws Exception {
+    if (visited[v.getIndex()]) {
+      return;
+    }
 
     // this will make sure, the same node is not visited again
     visited[v.getIndex()] = true;
@@ -188,10 +189,12 @@ public class PERT extends GraphAlgorithm<PERT.PERTVertex> {
     onPath[v.getIndex()] = true;
 
     // get adj list of current vertex and iterate through all edges if not visited
-    for (Edge edge: this.g.outEdges(v)) {
+    for (Edge edge : this.g.outEdges(v)) {
       // If the node is on current path, there is a cycle
       // throw exception with relevant error message
-      if (onPath[edge.toVertex().getIndex()]) throw new Exception("Not DAG! Cycle found in the graph at vertex " + edge.toVertex().getName());
+      if (onPath[edge.toVertex().getIndex()]) {
+        throw new Exception("Not DAG! Cycle found in the graph at vertex " + edge.toVertex().getName());
+      }
 
       if (!visited[edge.toVertex().getIndex()]) {
         depthFirstSearch(edge.toVertex(), g, visited, onPath, finisList);
@@ -203,10 +206,16 @@ public class PERT extends GraphAlgorithm<PERT.PERTVertex> {
     onPath[v.getIndex()] = false;
   }
 
-  // Member function to find topological order
+  /**
+   * Member function to find topological order (taken from SP)
+   *
+   * @return
+   */
   public List<Vertex> topologicalOrder() {
     // if not a directed graph, there is no topological order
-    if (!this.g.isDirected()) return null;
+    if (!this.g.isDirected()) {
+      return null;
+    }
 
     LinkedList<Vertex> finishList = new LinkedList<Vertex>();
     boolean[] visited = new boolean[this.g.size()];
@@ -221,7 +230,9 @@ public class PERT extends GraphAlgorithm<PERT.PERTVertex> {
       while (gIterator.hasNext()) {
         Vertex v = gIterator.next();
         boolean isVertexVisited = visited[v.getIndex()];
-        if (!isVertexVisited) depthFirstSearch(v, g, visited, onPath, finishList);
+        if (!isVertexVisited) {
+          depthFirstSearch(v, g, visited, onPath, finishList);
+        }
       }
     } catch (Exception ex) {
       System.out.println("Error: " + ex.getMessage());

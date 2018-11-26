@@ -1,6 +1,10 @@
 
 /** Starter code for permutations and combinations of distinct items
- *  @author Phanindra Pydisetty
+ * @authors
+ * Phanindra Pydisetty
+ * Sahith Reddy
+ * Karttik Yellu
+ * Bharath Rudra
  **/
 package pxp180031;
 
@@ -50,9 +54,9 @@ public class Enumerate<T> {
 			  T temp = arr[d];
 			  arr[d] = arr[i];
 			  arr[i] = temp;
-			  
+
 			  permute(c-1);
-			  
+
 			  arr[i] = arr[d];
 			  arr[d] = temp;
 		  }
